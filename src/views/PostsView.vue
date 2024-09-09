@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ChevronsDown, SearchIcon, UserPlus } from 'lucide-vue-next'
+import { ChevronDown, ChevronsDown, SearchIcon, UserPlus } from 'lucide-vue-next'
 </script>
 
 <template>
+  <!-- Action bar -->
   <div class="flex gap-8">
     <button class="btn rounded-bl-[40px] order-2 lg:order-1">
       Kullanıcı Ekle <UserPlus class="w-5 h-5 ms-2" />
@@ -23,5 +24,67 @@ import { ChevronsDown, SearchIcon, UserPlus } from 'lucide-vue-next'
       </select>
       <ChevronsDown class="w-5 h-5 absolute end-2" />
     </div>
+  </div>
+
+  <!-- Datatable -->
+  <div class="bg-[#D9D9D9] shadow-custom px-10 py-9 rounded-t-[56px] mt-8">
+    <table class="w-full">
+      <thead>
+        <tr
+          class="*:text-start *:bg-background *:p-4 first:*:rounded-tl-[25px] last:*:rounded-tr-[25px] *:font-semibold border-spacing-y-14"
+        >
+          <th>
+            <input type="checkbox" />
+          </th>
+          <th>ID</th>
+          <th>İSİM SOYİSİM</th>
+          <th>BAŞLIK</th>
+          <th>KATEGORİ</th>
+          <th>SON GÜNCELLEME</th>
+          <th></th>
+        </tr>
+        <tr class="h-14" colspan="2"></tr>
+      </thead>
+      <tbody class="*:bg-background has-[:checked]:*:bg-[#E3FFE4]">
+        <tr class="*:p-4 shadow-custom relative">
+          <td>
+            <input type="checkbox" />
+          </td>
+          <td>1</td>
+          <td>John Doe</td>
+          <td>Lorem ipsum dolor s...</td>
+          <td>Lorem</td>
+          <td>17 Mart</td>
+          <td class="text-end">
+            <button class="inline-block p-2 rounded-full hover:bg-muted">
+              <ChevronDown class="w-5 h-5" />
+            </button>
+          </td>
+        </tr>
+        <tr class="hidden">
+          <td colspan="7" class="bg-background p-4">content</td>
+        </tr>
+        <tr class="h-7" colspan="2"></tr>
+        <!-- row end/start -->
+        <tr class="*:p-4 shadow-custom relative">
+          <td>
+            <input type="checkbox" />
+          </td>
+          <td>1</td>
+          <td>John Doe</td>
+          <td>Lorem ipsum dolor s...</td>
+          <td>Lorem</td>
+          <td>17 Mart</td>
+          <td class="text-end">
+            <button class="inline-block p-2 rounded-full hover:bg-muted">
+              <ChevronDown class="w-5 h-5" />
+            </button>
+          </td>
+        </tr>
+        <tr class="hidden">
+          <td colspan="7" class="bg-background p-4">content</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
