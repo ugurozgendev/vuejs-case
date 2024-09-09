@@ -10,7 +10,13 @@ const props = defineProps<{
 
 const filteredData = computed(() => {
   const { data, keywords } = props
-  return data.filter((item) => item.user_name.toLowerCase().includes(keywords))
+  const searchItem = keywords.trim().toLowerCase()
+
+  if (searchItem) {
+    return data.filter((item) => item.user_name.toLowerCase().includes(searchItem))
+  }
+
+  return data
 })
 </script>
 
