@@ -26,13 +26,13 @@ const props = defineProps<{
         <tr class="h-14" colspan="2"></tr>
       </thead>
       <tbody class="*:bg-background has-[:checked]:*:bg-[#E3FFE4]">
-        <tr class="*:p-4 shadow-custom relative" v-for="item in props.data" :key="item.id">
+        <tr class="*:p-4 shadow-custom relative" v-for="post in props.data" :key="post.id">
           <td>
             <input type="checkbox" />
           </td>
-          <td>{{ item.id }}</td>
-          <td>John Doe</td>
-          <td>{{ item.title }}</td>
+          <td>{{ post.id }}</td>
+          <td>{{ post.user_name }}</td>
+          <td>{{ post.title }}</td>
           <td>Lorem</td>
           <td>17 Mart</td>
           <td class="text-end">

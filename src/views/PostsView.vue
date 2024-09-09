@@ -1,21 +1,26 @@
 <script setup lang="ts">
 import DataTable from '@/components/DataTable.vue'
-import type { Post } from '@/types'
-import axios from 'axios'
+import type { Post, User } from '@/types'
 import { ChevronsDown, SearchIcon, UserPlus } from 'lucide-vue-next'
 import { onMounted, ref } from 'vue'
 
-const apiUrl = import.meta.env.VITE_API_URL
+// Services
+import { getPosts } from '@/services/modules/PostService'
+import { getUsers } from '@/services/modules/UserService'
+
 const posts = ref<Post[]>([])
 
-// Get posts
-async function getPosts(): Promise<void> {
-  const { data } = await axios(`${apiUrl}/posts`)
-  posts.value = data
-}
+onMounted(async () => {
+  const usersData = await getUsers()
+  const postsData = await getPosts()
 
-onMounted(() => {
-  getPosts()
+  posts.value = postsData.map((post: Post) => {
+    const user = usersData.find((user: User) => user.id == post.userId)
+    return {
+      ...post,
+      user_name: user?.name || '-'
+    }
+  })
 })
 </script>
 
