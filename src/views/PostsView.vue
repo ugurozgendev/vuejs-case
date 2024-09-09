@@ -9,6 +9,7 @@ import { getPosts } from '@/services/modules/PostService'
 import { getUsers } from '@/services/modules/UserService'
 
 const posts = ref<Post[]>([])
+const keywords = ref('')
 
 onMounted(async () => {
   const usersData = await getUsers()
@@ -39,6 +40,7 @@ onMounted(async () => {
         name="keyword"
         placeholder="Kullanıcı Ara"
         class="w-full ps-10 focus:outline-none"
+        v-model="keywords"
       />
     </div>
     <div
@@ -54,5 +56,5 @@ onMounted(async () => {
   </div>
 
   <!-- Datatable -->
-  <DataTable :data="posts" />
+  <DataTable :data="posts" :keywords="keywords" />
 </template>
