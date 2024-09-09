@@ -18,7 +18,7 @@ import { LayoutGrid, UserIcon } from 'lucide-vue-next'
     </div>
   </aside>
   <main class="w-[var(--main-content-width)]">
-    <div class="container mx-auto bg-background shadow-card">
+    <div class="container mx-auto">
       <div class="py-4 px-6">
         <RouterView />
       </div>

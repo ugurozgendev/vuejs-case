@@ -16,7 +16,7 @@ export default {
         }
       },
       boxShadow: {
-        card: 'var(--card-shadow)'
+        custom: 'var(--card-shadow)'
       }
     }
   },
