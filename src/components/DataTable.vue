@@ -3,13 +3,16 @@ import type { Post } from '@/types'
 import { computed, ref, watchEffect } from 'vue'
 import DataTableItem from '@/components/DataTableItem.vue'
 import Pagination from '@/components/Pagination.vue'
+import { useStore } from '@/store'
 
 const props = defineProps<{
   data: Post[]
   keywords: string
 }>()
 
-const perPage = ref(12)
+const store = useStore()
+
+const perPage = ref(store.state.perPage)
 const currentPage = ref(1)
 const totalPage = ref(1)
 
@@ -37,6 +40,7 @@ const filteredDataPaginate = computed(() => {
 
 watchEffect(() => {
   currentPage.value = 1
+  perPage.value = store.state.perPage
   totalPage.value = Math.ceil(filteredData.value.length / perPage.value)
 })
 </script>

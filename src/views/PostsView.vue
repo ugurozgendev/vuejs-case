@@ -7,6 +7,7 @@ import { onMounted, ref } from 'vue'
 // Services
 import { getPosts } from '@/services/modules/PostService'
 import { getUserAvatar, getUsers } from '@/services/modules/UserService'
+import PerPageSelect from '@/components/PerPageSelect.vue'
 
 const posts = ref<Post[]>([])
 const keywords = ref('')
@@ -56,6 +57,7 @@ onMounted(async () => {
         v-model="keywords"
       />
     </div>
+    <PerPageSelect />
   </div>
 
   <!-- Datatable -->
