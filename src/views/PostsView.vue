@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import DataTable from '@/components/DataTable.vue'
 import type { Post, User } from '@/types'
-import { ChevronsDown, SearchIcon, UserPlus } from 'lucide-vue-next'
+import { SearchIcon, UserPlus } from 'lucide-vue-next'
 import { onMounted, ref } from 'vue'
 
 // Services
@@ -55,16 +55,6 @@ onMounted(async () => {
         class="w-full ps-10 focus:outline-none"
         v-model="keywords"
       />
-    </div>
-    <div
-      class="relative shadow-custom flex items-center justify-between bg-background rounded-lg rounded-br-[40px] overflow-hidden order-3"
-    >
-      <select name="" id="" class="appearance-none w-40 px-8 text-start h-full rounded-lg">
-        <option value="">1-6 in 100</option>
-        <option value="">7-12 in 100</option>
-        <option value="">13-18 in 100</option>
-      </select>
-      <ChevronsDown class="w-5 h-5 absolute end-2" />
     </div>
   </div>
 
