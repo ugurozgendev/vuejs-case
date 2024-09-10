@@ -29,20 +29,10 @@ const filteredData = computed(() => {
 })
 
 const filteredDataPaginate = computed(() => {
-  const { data, keywords } = props
-  const searchItem = keywords.trim().toLowerCase()
-
-  // for paginate
   const start = (currentPage.value - 1) * perPage.value
   const end = start + perPage.value
 
-  if (searchItem) {
-    return data
-      .filter((item) => item.user.name.toLowerCase().includes(searchItem))
-      .slice(start, end)
-  }
-
-  return data.slice(start, end)
+  return filteredData.value.slice(start, end)
 })
 
 watchEffect(() => {
