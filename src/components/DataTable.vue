@@ -42,6 +42,8 @@ watchEffect(() => {
   currentPage.value = 1
   perPage.value = store.state.perPage
   totalPage.value = Math.ceil(filteredData.value.length / perPage.value)
+
+  store.commit('setPerPageDataCount', filteredData.value.length)
 })
 </script>
 
