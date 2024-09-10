@@ -61,5 +61,5 @@ onMounted(async () => {
   </div>
 
   <!-- Datatable -->
-  <DataTable :data="posts" :keywords="keywords" />
+  <DataTable :data="posts" :keywords="keywords" tableType="posts" />
 </template>

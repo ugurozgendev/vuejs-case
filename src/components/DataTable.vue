@@ -8,6 +8,7 @@ import { useStore } from '@/store'
 const props = defineProps<{
   data: Post[]
   keywords: string
+  tableType: 'users' | 'posts'
 }>()
 
 const store = useStore()
@@ -55,7 +56,7 @@ watchEffect(() => {
         <tr
           class="*:text-start *:bg-background *:p-4 first:*:rounded-tl-[25px] last:*:rounded-tr-[25px] *:font-semibold border-spacing-y-14"
         >
-          <th>
+          <th v-if="tableType === 'posts'">
             <input type="checkbox" />
           </th>
           <th>ID</th>
@@ -63,14 +64,14 @@ watchEffect(() => {
           <th>BAŞLIK</th>
           <th>KATEGORİ</th>
           <th>SON GÜNCELLEME</th>
-          <th></th>
+          <th v-if="tableType === 'posts'"></th>
         </tr>
         <tr class="h-14" colspan="2"></tr>
       </thead>
       <tbody class="*:bg-background has-[:checked]:*:bg-[#E3FFE4]">
         <template v-if="filteredDataPaginate.length > 0">
           <template v-for="post in filteredDataPaginate" :key="post.id">
-            <DataTableItem :post="post" />
+            <DataTableItem :post="post" :tableType="props.tableType" />
           </template>
         </template>
         <template v-else>
@@ -82,6 +83,11 @@ watchEffect(() => {
     </table>
 
     <!-- pagination -->
-    <Pagination :totalPage="totalPage" :currentPage="currentPage" @update:page="handlePageChange" />
+    <Pagination
+      :totalPage="totalPage"
+      :currentPage="currentPage"
+      @update:page="handlePageChange"
+      :dataType="users"
+    />
   </div>
 </template>

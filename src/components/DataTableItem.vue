@@ -4,8 +4,9 @@ import { ChevronDown } from 'lucide-vue-next'
 import moment from 'moment'
 import { ref } from 'vue'
 
-const { post } = defineProps<{
+const { post, tableType } = defineProps<{
   post: Post
+  tableType: 'users' | 'posts'
 }>()
 
 const toggle = ref(false)
@@ -13,7 +14,7 @@ const toggle = ref(false)
 
 <template>
   <tr class="*:p-4 *:text-muted-foreground shadow-custom relative">
-    <td>
+    <td v-if="tableType === 'posts'">
       <input type="checkbox" />
     </td>
     <td>{{ post.id }}</td>
@@ -21,13 +22,13 @@ const toggle = ref(false)
     <td>{{ post.title }}</td>
     <td>Lorem</td>
     <td>17 Mart</td>
-    <td class="text-end">
+    <td class="text-end" v-if="tableType === 'posts'">
       <button @click="toggle = !toggle" class="inline-block p-2 rounded-full hover:bg-muted">
         <ChevronDown class="w-5 h-5" />
       </button>
     </td>
   </tr>
-  <tr :class="{ hidden: !toggle }">
+  <tr v-if="tableType === 'posts'" :class="{ hidden: !toggle }">
     <td colspan="7" class="bg-muted text-muted-foreground px-6 py-8">
       <div class="grid grid-cols-3">
         <div class="col-span-1">
