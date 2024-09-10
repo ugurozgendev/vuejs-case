@@ -56,3 +56,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+button[disabled] {
+  opacity: 0.3;
+}
