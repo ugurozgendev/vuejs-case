@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import type { Post } from '@/types'
 import { ChevronDown } from 'lucide-vue-next'
+import { ref } from 'vue'
 
 const { post } = defineProps<{
   post: Post
 }>()
+
+const toggle = ref(false)
 </script>
 
 <template>
-  <tr class="*:p-4 shadow-custom relative">
+  <tr class="*:p-4 *:text-muted-foreground shadow-custom relative">
     <td>
       <input type="checkbox" />
     </td>
@@ -18,13 +21,35 @@ const { post } = defineProps<{
     <td>Lorem</td>
     <td>17 Mart</td>
     <td class="text-end">
-      <button class="inline-block p-2 rounded-full hover:bg-muted">
+      <button @click="toggle = !toggle" class="inline-block p-2 rounded-full hover:bg-muted">
         <ChevronDown class="w-5 h-5" />
       </button>
     </td>
   </tr>
-  <tr class="hidden">
-    <td colspan="7" class="bg-background p-4">content</td>
+  <tr :class="{ hidden: !toggle }">
+    <td colspan="7" class="bg-muted text-muted-foreground px-6 py-8">
+      <div class="grid grid-cols-3">
+        <div class="col-span-1">
+          <div class="flex gap-6">
+            <figure
+              class="border-[7px] border-[#BEF5CD] w-[128px] h-[128px] rounded-full bg-red-500"
+            ></figure>
+            <div class="flex flex-col *:bg-background gap-3 *:p-1 *:pe-8">
+              <span>{{ post.user_name }}</span>
+              <span>johndoe@example.com</span>
+              <span>22/01/1973</span>
+              <span>(555) 555-1234</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-2">
+          <div class="flex flex-col *:bg-background gap-3 *:px-3 *:py-1">
+            <span class="font-bold">{{ post.title }}</span>
+            <span>{{ post.body }}</span>
+          </div>
+        </div>
+      </div>
+    </td>
   </tr>
   <tr class="h-7" colspan="2"></tr>
 </template>
