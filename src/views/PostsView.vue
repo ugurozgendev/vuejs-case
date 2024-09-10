@@ -6,20 +6,33 @@ import { onMounted, ref } from 'vue'
 
 // Services
 import { getPosts } from '@/services/modules/PostService'
-import { getUsers } from '@/services/modules/UserService'
+import { getUserAvatar, getUsers } from '@/services/modules/UserService'
 
 const posts = ref<Post[]>([])
 const keywords = ref('')
 
 onMounted(async () => {
   const usersData = await getUsers()
+  const userAvatarsData = await getUserAvatar()
   const postsData = await getPosts()
 
   posts.value = postsData.map((post: Post) => {
-    const user = usersData.find((user: User) => user.id == post.userId)
+    const user = usersData.find((user: User) => user.id == post.userId) // gonderilerin kullanicisina gore user bulalim
+
+    // Avatar icin rastgele bir indek
+    const randomIndex = Math.floor(Math.random() * userAvatarsData.length)
+    const avatarItem = userAvatarsData[randomIndex]
+
     return {
       ...post,
-      user_name: user?.name || '-'
+      // bulunan gonderi user datasini birlestirelim
+      user: {
+        name: user?.name || '-',
+        avatar: avatarItem?.picture?.medium,
+        email: avatarItem?.email,
+        birtday: avatarItem?.dob.date,
+        phone: avatarItem?.phone
+      }
     }
   })
 })

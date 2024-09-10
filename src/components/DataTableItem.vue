@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Post } from '@/types'
 import { ChevronDown } from 'lucide-vue-next'
+import moment from 'moment'
 import { ref } from 'vue'
 
 const { post } = defineProps<{
@@ -16,7 +17,7 @@ const toggle = ref(false)
       <input type="checkbox" />
     </td>
     <td>{{ post.id }}</td>
-    <td>{{ post.user_name }}</td>
+    <td>{{ post.user.name }}</td>
     <td>{{ post.title }}</td>
     <td>Lorem</td>
     <td>17 Mart</td>
@@ -31,14 +32,18 @@ const toggle = ref(false)
       <div class="grid grid-cols-3">
         <div class="col-span-1">
           <div class="flex gap-6">
-            <figure
-              class="border-[7px] border-[#BEF5CD] w-[128px] h-[128px] rounded-full bg-red-500"
-            ></figure>
+            <figure>
+              <img
+                :src="post.user.avatar"
+                class="border-[7px] border-[#BEF5CD] w-[128px] h-[128px] rounded-full"
+                alt=""
+              />
+            </figure>
             <div class="flex flex-col *:bg-background gap-3 *:p-1 *:pe-8">
-              <span>{{ post.user_name }}</span>
-              <span>johndoe@example.com</span>
-              <span>22/01/1973</span>
-              <span>(555) 555-1234</span>
+              <span>{{ post.user.name }}</span>
+              <span>{{ post.user.email }}</span>
+              <span>{{ moment(post.user.birtday).format('DD.MM.YYYY') }}</span>
+              <span>{{ post.user.phone }}</span>
             </div>
           </div>
         </div>
