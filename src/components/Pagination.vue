@@ -18,7 +18,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <div class="text-end" v-if="totalPage > 1">
+  <div class="text-end mt-8 mb-4" v-if="totalPage > 1">
     <div class="inline-flex items-center bg-background gap-4 rounded-full p-4 ms-auto">
       <button @click="goToPage(currentPage - 1)" :disabled="currentPage === 1">
         <ArrowLeftCircle />

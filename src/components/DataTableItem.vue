@@ -9,6 +9,7 @@ import { useToast } from 'vue-toast-notification'
 const { post, tableType } = defineProps<{
   post: Post
   tableType: 'users' | 'posts'
+  isLast: boolean
 }>()
 const $toast = useToast()
 const store = useStore()
@@ -82,5 +83,5 @@ const toggle = ref(false)
       </div>
     </td>
   </tr>
-  <tr class="h-7" colspan="2"></tr>
+  <tr v-if="!isLast" class="h-7" colspan="2"></tr>
 </template>

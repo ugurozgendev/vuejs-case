@@ -76,10 +76,11 @@ watchEffect(() => {
       </thead>
       <tbody class="*:bg-background has-[:checked]:*:bg-[#E3FFE4]">
         <template v-if="filteredDataPaginate.length > 0">
-          <template v-for="post in filteredDataPaginate" :key="post.id">
+          <template v-for="(post, index) in filteredDataPaginate" :key="post.id">
             <DataTableItem
               :post="post"
               :tableType="props.tableType"
+              :isLast="index === filteredDataPaginate.length - 1"
               @postSelectHandle="postSelectHandle"
             />
           </template>
@@ -91,8 +92,8 @@ watchEffect(() => {
         </template>
       </tbody>
     </table>
-
-    <!-- pagination -->
-    <Pagination :totalPage="totalPage" :currentPage="currentPage" @update:page="handlePageChange" />
   </div>
+
+  <!-- pagination -->
+  <Pagination :totalPage="totalPage" :currentPage="currentPage" @update:page="handlePageChange" />
 </template>
