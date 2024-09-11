@@ -1,13 +1,34 @@
 <script setup lang="ts">
+import { useStore } from '@/store'
 import type { Post } from '@/types'
 import { ChevronDown } from 'lucide-vue-next'
 import moment from 'moment'
 import { ref } from 'vue'
+import { useToast } from 'vue-toast-notification'
 
 const { post, tableType } = defineProps<{
   post: Post
   tableType: 'users' | 'posts'
 }>()
+const $toast = useToast()
+const store = useStore()
+
+const emits = defineEmits(['postSelectHandle'])
+
+const handleCheckboxChange = (event: Event, id: number) => {
+  const isChecked = (event.target as HTMLInputElement).checked
+
+  if (!store.state.selectedPosts.includes(id)) {
+    emits('postSelectHandle', id)
+  }
+
+  if (!isChecked) {
+    if (store.state.selectedPosts.includes(id)) {
+      $toast.success('Kullanicilardan kaldirildi.')
+    }
+    store.commit('removePost', id)
+  }
+}
 
 const toggle = ref(false)
 </script>
@@ -15,7 +36,11 @@ const toggle = ref(false)
 <template>
   <tr class="*:p-4 *:text-muted-foreground shadow-custom relative">
     <td v-if="tableType === 'posts'">
-      <input type="checkbox" />
+      <input
+        type="checkbox"
+        @change="(event) => handleCheckboxChange(event, post.id)"
+        :checked="store.state.selectedPosts.includes(post.id)"
+      />
     </td>
     <td>{{ post.id }}</td>
     <td>{{ post.user.name }}</td>

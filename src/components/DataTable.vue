@@ -39,6 +39,12 @@ const filteredDataPaginate = computed(() => {
   return filteredData.value.slice(start, end)
 })
 
+const emits = defineEmits(['postSelectHandle'])
+
+const postSelectHandle = (postId: number) => {
+  emits('postSelectHandle', postId)
+}
+
 watchEffect(() => {
   currentPage.value = 1
   perPage.value = store.state.perPage
@@ -71,7 +77,11 @@ watchEffect(() => {
       <tbody class="*:bg-background has-[:checked]:*:bg-[#E3FFE4]">
         <template v-if="filteredDataPaginate.length > 0">
           <template v-for="post in filteredDataPaginate" :key="post.id">
-            <DataTableItem :post="post" :tableType="props.tableType" />
+            <DataTableItem
+              :post="post"
+              :tableType="props.tableType"
+              @postSelectHandle="postSelectHandle"
+            />
           </template>
         </template>
         <template v-else>
@@ -83,11 +93,6 @@ watchEffect(() => {
     </table>
 
     <!-- pagination -->
-    <Pagination
-      :totalPage="totalPage"
-      :currentPage="currentPage"
-      @update:page="handlePageChange"
-      :dataType="users"
-    />
+    <Pagination :totalPage="totalPage" :currentPage="currentPage" @update:page="handlePageChange" />
   </div>
 </template>

@@ -4,6 +4,7 @@ import { LayoutGrid, UserIcon } from 'lucide-vue-next'
 </script>
 
 <template>
+  <Toaster />
   <aside
     class="fixed start-0 top-0 bottom-0 flex flex-col h-screen bg-background w-[var(--sidebar-width)] shadow"
   >
